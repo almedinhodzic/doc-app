@@ -9,6 +9,15 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
+export const getUserById = async (id: string) => {
+  try {
+    let user = await User.findById(id);
+    return user;
+  } catch (error) {
+    throw Error("Error while searching users by id!");
+  }
+};
+
 export const createUser = async (email: string, hashedPassword: string) => {
   let user = new User({ email, hashedPassword });
 

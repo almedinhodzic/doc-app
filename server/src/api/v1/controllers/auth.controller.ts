@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { createUser, getUserByEmail } from "../services/auth.service";
+import { createUser, getUserByEmail } from "../services/user.service";
 
 type EmailPw = { email: string; password: string };
 
@@ -23,6 +23,12 @@ export const registerUser = async (req: Request, res: Response) => {
     let hashedPassword = await bcrypt.hash(password, salt);
 
     user = await createUser(email, hashedPassword);
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ msg: "Could not create user, please try again later!!" });
+    }
 
     // Return JWT
     const payload = {

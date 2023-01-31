@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
+import { IUser } from "../interfaces/types/IUser";
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -13,7 +14,6 @@ const UserSchema = new Schema(
       required: true,
       minLength: 6,
     },
-    roles: [String],
     isActive: Boolean,
   },
   { timestamps: true }
