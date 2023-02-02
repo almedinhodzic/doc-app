@@ -1,6 +1,7 @@
+import { IUser } from "../interfaces/IUser";
 import User from "../models/User.model";
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string): Promise<IUser | null> => {
   try {
     let user = await User.findOne({ email });
     return user;
@@ -9,7 +10,7 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
-export const getUserById = async (id: string) => {
+export const getUserById = async (id: string): Promise<IUser | null> => {
   try {
     let user = await User.findById(id);
     return user;
@@ -18,7 +19,10 @@ export const getUserById = async (id: string) => {
   }
 };
 
-export const createUser = async (email: string, hashedPassword: string) => {
+export const createUser = async (
+  email: string,
+  hashedPassword: string
+): Promise<IUser | null> => {
   let user = new User({ email, hashedPassword });
 
   try {

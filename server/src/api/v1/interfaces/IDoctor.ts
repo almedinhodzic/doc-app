@@ -1,4 +1,4 @@
-import { IUser } from "./types/IUser";
+import { IUser } from "./IUser";
 
 export interface IDoctor {
   firstName: string;

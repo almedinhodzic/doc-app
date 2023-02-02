@@ -35,6 +35,7 @@ export const postDoctor = async (req: Request, res: Response) => {
       },
       user
     );
+    res.json({ data: doctor });
   } catch (error) {
     res.status(500).send("Server error!");
   }
