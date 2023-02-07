@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "REST API for Swagger Documentation",
+    "version": "1.0.0"
+  },
+  "schemes": ["http"],
+  "servers": [{ "url": "http://localhost:8081/" }],
+  "paths": {
+    "/api/v1/auth": {
+      "post": {
+        "tags": ["Create User"],
+        "summary": "Create user and store into the database",
+        "description": "Send user credentials, save it, then return token for login of user.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUserOutSchema"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request" },
+          "404": { "description": "Not found" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateUserSchema": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "example@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "Password123!@#"
+          }
+        }
+      },
+      "CreateUserOutSchema": {
+        "required": ["text"],
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "dasdasdnkj12n43j4n324n1l4bn12k4jkj4bkj4b32kj"
+          }
+        }
+      }
+    }
+  }
+}

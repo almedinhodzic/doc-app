@@ -5,6 +5,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { router } from "./api/v1/routes";
 
+// Swagger
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./config/swagger/swagger.json";
+
 // Routes imports
 
 dotenv.config();
@@ -14,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use("/", router);
