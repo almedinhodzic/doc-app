@@ -9,6 +9,11 @@ import { router } from "./api/v1/routes";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./config/swagger/swagger.json";
 
+// Logger
+import Logger from "./config/logger";
+// Morgan middleware for logging
+import morganMiddleware from "./api/v1/middlewares/log/morgan.middleware";
+
 // Routes imports
 
 dotenv.config();
@@ -18,6 +23,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(morganMiddleware);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
