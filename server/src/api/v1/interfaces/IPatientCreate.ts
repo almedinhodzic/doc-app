@@ -1,7 +1,7 @@
-export interface IPatientCreate {
+export type IPatientCreate = {
   firstName: string;
   lastName: string;
   dateOfBirth?: Date;
   gender?: string;
   doctor_id: string;
-}
+};

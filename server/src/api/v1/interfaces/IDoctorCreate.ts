@@ -1,4 +1,4 @@
-export interface IDoctorCreate {
+export type IDoctorCreate = {
   firstName: string;
   lastName: string;
   medicalSpecialty: string;
@@ -7,4 +7,4 @@ export interface IDoctorCreate {
   university?: string;
   gender?: string;
   user_id: string;
-}
+};

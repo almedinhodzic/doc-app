@@ -1,6 +1,6 @@
 import { IUser } from "./IUser";
 
-export interface IDoctor {
+export type IDoctor = {
   firstName: string;
   lastName: string;
   medicalSpecialty: string;
@@ -9,4 +9,4 @@ export interface IDoctor {
   university?: string;
   gender?: string;
   user: IUser;
-}
+};

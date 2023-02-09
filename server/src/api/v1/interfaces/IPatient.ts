@@ -1,9 +1,9 @@
 import { IDoctor } from "./IDoctor";
 
-export interface IPatient {
+export type IPatient = {
   firstName: string;
   lastName: string;
   dateOfBirth?: Date;
   gender?: string;
   doctor: IDoctor;
-}
+};

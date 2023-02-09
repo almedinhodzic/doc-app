@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -9,8 +10,6 @@ import { router } from "./api/v1/routes";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from "./config/swagger/swagger.json";
 
-// Logger
-import Logger from "./config/logger";
 // Morgan middleware for logging
 import morganMiddleware from "./api/v1/middlewares/log/morgan.middleware";
 

@@ -4,7 +4,7 @@ import { ITreatment } from "../interfaces/ITreatment";
 export const createTreatment = async (
   treatmentData: ITreatment
 ): Promise<ITreatment> => {
-  let treatment = new Treatment({
+  const treatment = new Treatment({
     therapy: treatmentData.therapy,
     dateOfTherapy: treatmentData.dateOfTherapy,
     status: treatmentData.status,

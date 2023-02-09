@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -20,7 +21,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     const salt = await bcrypt.genSalt(10);
 
-    let hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     user = await createUser(email, hashedPassword);
 
@@ -55,7 +56,7 @@ export const loginUser = async (req: Request, res: Response) => {
   const { email, password }: EmailPw = req.body;
 
   try {
-    let user = await getUserByEmail(email);
+    const user = await getUserByEmail(email);
     if (!user) {
       return res.status(400).json({ msg: "Invalid credentials!" });
     }

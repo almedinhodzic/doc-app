@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 
 export const postTreatment = async (req: Request, res: Response) => {
-  // TODO: Create treatment, but first checks for doctor and patient
+  const { treatment } = req.body;
+  res.json({ treatment });
+  // Currently only to prevent eslint errors
+  // TODO: Implement create of treatment with doctor and patient checks
 };

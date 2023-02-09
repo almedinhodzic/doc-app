@@ -7,7 +7,7 @@ export const createDoctor = async (
   doctorData: IDoctorCreate,
   user: IUser
 ): Promise<IDoctor> => {
-  let doctor = new Doctor({
+  const doctor = new Doctor({
     firstName: doctorData.firstName,
     lastName: doctorData.lastName,
     medicalSpecialty: doctorData.medicalSpecialty,
