@@ -7,11 +7,11 @@
   "schemes": ["http"],
   "servers": [{ "url": "http://localhost:8081/" }],
   "paths": {
-    "/api/v1/auth": {
+    "/api/v1/auth/register": {
       "post": {
         "tags": ["Create User"],
         "summary": "Create user and store into the database",
-        "description": "Send user credentials, save it, then return token for login of user.",
+        "description": "Send user credentials, save it, then return token for login of user imediately after creation.",
         "requestBody": {
           "required": true,
           "content": {
@@ -34,7 +34,38 @@
             }
           },
           "400": { "description": "Bad request" },
-          "404": { "description": "Not found" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": ["Log User"],
+        "summary": "Log in with an existing user",
+        "description": "Log in with an existing user, save it, then return token if user is logged successfully.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserSchema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUserOutSchema"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request" },
+          "401": { "description": "Unauthorized" },
           "500": { "description": "Internal server error" }
         }
       }

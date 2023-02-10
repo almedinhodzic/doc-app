@@ -44,7 +44,7 @@ export const registerUser = async (req: Request, res: Response) => {
       { expiresIn: "1 hour" },
       (err: Error | null, token: string | undefined) => {
         if (err) throw err;
-        res.json({ token });
+        res.status(201).json({ token });
       }
     );
   } catch (error) {
@@ -79,7 +79,7 @@ export const loginUser = async (req: Request, res: Response) => {
       { expiresIn: "1 hour" },
       (err: Error | null, token: string | undefined) => {
         if (err) throw err;
-        res.json({ token });
+        res.status(200).json({ token });
       }
     );
   } catch (error) {

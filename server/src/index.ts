@@ -6,10 +6,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { router } from "./api/v1/routes";
 
-// Swagger
-import swaggerUi from "swagger-ui-express";
-import * as swaggerDocument from "./config/swagger/swagger.json";
-
 // Morgan middleware for logging
 import morganMiddleware from "./api/v1/middlewares/log/morgan.middleware";
 
@@ -23,7 +19,6 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(morganMiddleware);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use("/", router);
