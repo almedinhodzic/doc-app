@@ -15,6 +15,23 @@ const UserSchema = new Schema<IUser>(
       minLength: 6,
     },
     isActive: Boolean,
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    medicalSpecialty: {
+      type: String,
+      required: true,
+    },
+    licence: String,
+    dateOfBirth: Date,
+    yearOfGraduation: Number,
+    university: String,
+    gender: String,
   },
   { timestamps: true }
 );

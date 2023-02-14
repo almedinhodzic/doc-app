@@ -6,10 +6,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { router } from "./api/v1/routes";
 
+// Logger
+import Logger from "./config/logger";
 // Morgan middleware for logging
 import morganMiddleware from "./api/v1/middlewares/log/morgan.middleware";
-
-// Routes imports
 
 dotenv.config();
 
@@ -29,6 +29,6 @@ mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGO_URL!)
   .then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+    app.listen(PORT, () => Logger.info(`Server Port: ${PORT}`));
   })
-  .catch((error) => console.log(`Error: ${error}`));
+  .catch((error) => Logger.error(`Error: ${error}`));

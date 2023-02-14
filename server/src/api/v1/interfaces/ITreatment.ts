@@ -1,4 +1,3 @@
-import { IDoctor } from "./IDoctor";
 import { IPatient } from "./IPatient";
 
 export type ITreatment = {
@@ -6,6 +5,5 @@ export type ITreatment = {
   therapy: string;
   dateOfTherapy: Date;
   status: string;
-  doctor: IDoctor;
   patient: IPatient;
 };

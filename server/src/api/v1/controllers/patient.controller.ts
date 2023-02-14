@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import { IPatientCreate } from "../interfaces/IPatientCreate";
-import { getDoctorById } from "../services/doctor.service";
-import { createPatient } from "../services/patient.service";
 
 export const postPatient = async (req: Request, res: Response) => {
   const {
@@ -12,24 +10,21 @@ export const postPatient = async (req: Request, res: Response) => {
     doctor_id,
   }: IPatientCreate = req.body;
 
-  const doctor = await getDoctorById(doctor_id);
-  console.log(doctor);
-
-  if (!doctor) {
-    return res.status(400).json({ msg: "Patient can not be created!" });
-  }
-
   try {
-    const patient = await createPatient(
-      {
-        firstName,
-        lastName,
-        dateOfBirth,
-        gender,
-        doctor_id,
-      },
-      doctor
-    );
+    // const patient = await createPatient({
+    //   firstName,
+    //   lastName,
+    //   dateOfBirth,
+    //   gender,
+    //   doctor_id,
+    // });
+    const patient = {
+      firstName,
+      lastName,
+      dateOfBirth,
+      gender,
+      doctor_id,
+    };
     res.json({ data: patient });
   } catch (error) {
     res.status(500).send("Server error!");
