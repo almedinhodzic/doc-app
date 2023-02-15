@@ -8,7 +8,6 @@ export const createTreatment = async (
     therapy: treatmentData.therapy,
     dateOfTherapy: treatmentData.dateOfTherapy,
     status: treatmentData.status,
-    doctor: treatmentData.doctor,
     patient: treatmentData.patient,
   });
 

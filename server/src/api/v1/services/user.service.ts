@@ -12,7 +12,7 @@ export const getUserByEmail = async (email: string): Promise<IUser | null> => {
 
 export const getUserById = async (id: string): Promise<IUser | null> => {
   try {
-    const user = await User.findById(id);
+    const user = await User.findOne({ _id: id });
     return user;
   } catch (error) {
     throw Error("Error while searching users by id!");
@@ -30,5 +30,14 @@ export const createUser = async (
     return user;
   } catch (error) {
     throw Error("Error while saving user!");
+  }
+};
+
+export const getAllUsers = async (): Promise<IUser[]> => {
+  try {
+    const users = await User.find();
+    return users;
+  } catch (error) {
+    throw Error("Error while fetching all users!");
   }
 };
