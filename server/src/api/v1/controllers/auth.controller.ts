@@ -3,12 +3,23 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { createUser, getUserByEmail } from "../services/user.service";
-
-type EmailPw = { email: string; password: string };
+import { Login as LoginType } from "../interfaces/types/Login";
+import { UserCreate as UserCreateType } from "../interfaces/types/UserCreate";
 
 export const registerUser = async (req: Request, res: Response) => {
   // Destructure email and password from body
-  const { email, password }: EmailPw = req.body;
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    licence,
+    dateOfBirth,
+    medicalSpecialty,
+    gender,
+    university,
+    yearOfGraduation,
+  }: UserCreateType = req.body;
 
   try {
     let user = await getUserByEmail(email);
@@ -23,7 +34,18 @@ export const registerUser = async (req: Request, res: Response) => {
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    user = await createUser(email, hashedPassword);
+    user = await createUser({
+      email,
+      password: hashedPassword,
+      firstName,
+      lastName,
+      licence,
+      dateOfBirth,
+      medicalSpecialty,
+      gender,
+      university,
+      yearOfGraduation,
+    });
 
     if (!user) {
       return res
@@ -53,7 +75,7 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 export const loginUser = async (req: Request, res: Response) => {
-  const { email, password }: EmailPw = req.body;
+  const { email, password }: LoginType = req.body;
 
   try {
     const user = await getUserByEmail(email);
