@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-import { ITreatment } from "../interfaces/ITreatment";
+import { Treatment } from "../types/Treatment";
 
-const TreatmentModel = new Schema<ITreatment>({
+const TreatmentModel = new Schema<Treatment>({
   therapy: {
     type: String,
     required: true,
@@ -11,10 +11,6 @@ const TreatmentModel = new Schema<ITreatment>({
     required: true,
   },
   status: String,
-  doctor: {
-    type: Schema.Types.ObjectId,
-    ref: "Doctor",
-  },
   patient: {
     type: Schema.Types.ObjectId,
     ref: "Patient",

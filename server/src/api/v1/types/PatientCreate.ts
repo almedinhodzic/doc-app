@@ -1,9 +1,7 @@
-import { IUser } from "./types/User";
-
-export type IPatient = {
+export type PatientCreate = {
   firstName: string;
   lastName: string;
   dateOfBirth?: Date;
   gender?: string;
-  doctor: IUser;
+  doctor_id: string;
 };

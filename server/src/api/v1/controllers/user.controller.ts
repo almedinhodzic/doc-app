@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { UserResponse } from "../schemas/UserResponse";
-import { getAllUsers, getUserById, removeUser } from "../services/user.service";
+import {
+  getAllUsers,
+  getUserById,
+  modifyUser,
+  removeUser,
+} from "../services/user.service";
 
 export const getUser = async (req: Request, res: Response) => {
   const id: string = req.params.userId;
@@ -27,8 +32,8 @@ export const getUser = async (req: Request, res: Response) => {
         user.gender
       ),
     });
-  } catch (error) {
-    res.status(500).json({ success: false, msg: "Server error!" });
+  } catch ({ message }) {
+    res.status(500).json({ success: false, msg: message });
   }
 };
 
@@ -36,8 +41,8 @@ export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await getAllUsers();
     res.status(200).json({ success: true, data: users });
-  } catch (error) {
-    res.status(500).json({ success: false, msg: "Server error!" });
+  } catch ({ message }) {
+    res.status(500).json({ success: false, msg: message });
   }
 };
 
@@ -55,7 +60,32 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     await removeUser(user.id);
     return res.status(204);
-  } catch (error) {
-    res.status(500).json({ success: false, msg: "Server error!" });
+  } catch ({ message }) {
+    res.status(500).json({ success: false, msg: message });
+  }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+  const { id, firstName, lastName } = req.body;
+
+  try {
+    if (userId !== id) {
+      return res
+        .status(400)
+        .json({ success: false, msg: "User can not be updated!" });
+    }
+
+    let user = await getUserById(id);
+    if (!user) {
+      return res.status(404).json({ success: false, msg: "User not found!" });
+    }
+
+    user = await modifyUser({ id, firstName, lastName });
+    return res
+      .status(200)
+      .json({ success: true, msg: "User updated successfully!", data: user });
+  } catch ({ message }) {
+    return res.status(500).json({ success: false, msg: message });
   }
 };

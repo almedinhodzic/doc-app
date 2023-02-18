@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { createUser, getUserByEmail } from "../services/user.service";
-import { Login as LoginType } from "../interfaces/types/Login";
-import { UserCreate as UserCreateType } from "../interfaces/types/UserCreate";
+import { Login as LoginType } from "../types/Login";
+import { UserCreate as UserCreateType } from "../types/UserCreate";
 
 export const registerUser = async (req: Request, res: Response) => {
   // Destructure email and password from body

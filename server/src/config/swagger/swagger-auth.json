@@ -11,7 +11,7 @@
       "post": {
         "tags": ["Create User"],
         "summary": "Create user and store into the database",
-        "description": "Send user credentials, save it, then return token for login of user imediately after creation.",
+        "description": "Send user credentials, save it, then return token for login of user immediately after creation.",
         "requestBody": {
           "required": true,
           "content": {

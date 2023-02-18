@@ -1,13 +1,13 @@
-import { User as UserType } from "../interfaces/types/User";
-import { UserCreate as UserCreateType } from "../interfaces/types/UserCreate";
+import { User as UserType } from "../types/User";
+import { UserCreate as UserCreateType } from "../types/UserCreate";
 import User from "../models/User.model";
+import { UserUpdate } from "../types/UserUpdate";
 
 export const getUserByEmail = async (
   email: string
 ): Promise<UserType | null> => {
   try {
-    const user = await User.findOne({ email });
-    return user;
+    return await User.findOne({ email });
   } catch (error) {
     throw Error("Error while searching users by email!");
   }
@@ -15,8 +15,7 @@ export const getUserByEmail = async (
 
 export const getUserById = async (id: string): Promise<UserType | null> => {
   try {
-    const user = await User.findOne({ _id: id });
-    return user;
+    return await User.findOne({ _id: id });
   } catch (error) {
     throw Error("Error while searching users by id!");
   }
@@ -57,8 +56,7 @@ export const createUser = async ({
 
 export const getAllUsers = async (): Promise<UserType[]> => {
   try {
-    const users = await User.find();
-    return users;
+    return await User.find();
   } catch (error) {
     throw Error("Error while fetching all users!");
   }
@@ -69,5 +67,13 @@ export const removeUser = async (id: string) => {
     await User.findByIdAndRemove(id);
   } catch (error) {
     throw Error("Error while deleting user!");
+  }
+};
+
+export const modifyUser = async ({ id, firstName, lastName }: UserUpdate) => {
+  try {
+    return await User.findOneAndUpdate({ id, firstName, lastName });
+  } catch (e) {
+    throw Error("Error while updating user!");
   }
 };

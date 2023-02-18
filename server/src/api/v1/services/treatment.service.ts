@@ -1,9 +1,9 @@
 import Treatment from "../models/Treatment.model";
-import { ITreatment } from "../interfaces/ITreatment";
+import { Treatment as TreatmentType } from "../types/Treatment";
 
 export const createTreatment = async (
-  treatmentData: ITreatment
-): Promise<ITreatment> => {
+  treatmentData: TreatmentType
+): Promise<TreatmentType> => {
   const treatment = new Treatment({
     therapy: treatmentData.therapy,
     dateOfTherapy: treatmentData.dateOfTherapy,
