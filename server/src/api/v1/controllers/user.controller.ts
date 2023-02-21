@@ -68,7 +68,6 @@ export const deleteUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
   const { id, firstName, lastName } = req.body;
-
   try {
     if (userId !== id) {
       return res
